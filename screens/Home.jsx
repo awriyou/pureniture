@@ -6,6 +6,7 @@ import { Ionicons, Fontisto } from '@expo/vector-icons';
 import {  } from 'react-native-gesture-handler';
 import { Welcome } from '../components';
 import Carousel from '../components/home/Carousel';
+import Heading from '../components/home/Heading';
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
       <ScrollView>
         <Welcome />
         <Carousel />
+        <Heading />
       </ScrollView>
     </SafeAreaView>
   );
