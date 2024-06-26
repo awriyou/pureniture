@@ -9,7 +9,7 @@ import { COLORS } from '../../constants';
 const ProductCardView = ({item}) => {
   const navigation = useNavigation()
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("ProductDetails", {item})}> 
+    <TouchableOpacity onPress={() => navigation.navigate("ProductDetails", {item})} > 
     {/*//! item diatas untuk mengirim kepada component productDetails  */}
       <View style={styles.container}>
         <View style={styles.imageContainer}>

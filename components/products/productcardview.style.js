@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   container: {
     width: 182,
     height: 240,
-    marginEnd: 22,
+    marginHorizontal: 4,
+    // marginEnd: 2,
     borderRadius: SIZES.medium,
     backgroundColor: COLORS.secondary,
   },

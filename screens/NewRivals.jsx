@@ -4,6 +4,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./newrival.style";
 import { COLORS } from "../constants";
+import { ProductList } from "../components";
 
 const NewRivals = ({navigation}) => {
   return (
@@ -15,6 +16,7 @@ const NewRivals = ({navigation}) => {
           </TouchableOpacity>
           <Text style={styles.heading}> Product </Text>
         </View>
+        <ProductList />
       </View>
     </SafeAreaView>
   );
