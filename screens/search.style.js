@@ -38,6 +38,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  searchImage:{
+    resizeMode: 'contain',
+    width: SIZES.width -100,
+    height: SIZES.height -300,
+    opacity: 0.7,
+  },
 });
 
 export default styles
