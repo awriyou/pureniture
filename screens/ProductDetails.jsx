@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { styles } from './productdetails.style';
 import {
@@ -10,6 +11,10 @@ import {
 import { COLORS, SIZES } from '../constants';
 
 const ProductDetails = ({ navigation }) => {
+  const route = useRoute();
+  const { item } = route.params;
+  // console.log(item)
+
   const [qty, setQty] = useState(1);
 
   function incrementQty() {
@@ -34,14 +39,14 @@ const ProductDetails = ({ navigation }) => {
       <Image
         style={styles.image}
         source={{
-          uri: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          uri: item.imageUrl,
         }}
       />
       <View style={styles.details}>
         <View style={styles.titleRow}>
-          <Text style={styles.title}>Product</Text>
+          <Text style={styles.title}>{item.title}</Text>
           <View style={styles.priceWrapper}>
-            <Text style={styles.price}>Rp 3.000.000</Text>
+            <Text style={styles.price}>{item.price}</Text>
           </View>
         </View>
         <View style={styles.ratingRow}>
@@ -72,26 +77,14 @@ const ProductDetails = ({ navigation }) => {
         <View style={styles.descriptionWrapper}>
           <Text style={styles.description}>Description</Text>
           <Text style={styles.descText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Interdum
-            varius sit amet mattis vulputate enim nulla aliquet. Tellus cras
-            adipiscing enim eu turpis egestas pretium aenean pharetra. Sed arcu
-            non odio euismod lacinia at quis risus sed. Vitae congue mauris
-            rhoncus aenean vel elit. Semper risus in hendrerit gravida. Netus et
-            malesuada fames ac turpis. Cursus vitae congue mauris rhoncus aenean
-            vel. Non pulvinar neque laoreet suspendisse interdum consectetur
-            libero. Tortor id aliquet lectus proin. Eget magna fermentum iaculis
-            eu. Interdum velit euismod in pellentesque. Ullamcorper dignissim
-            cras tincidunt lobortis feugiat. Amet commodo nulla facilisi nullam
-            vehicula ipsum a. In cursus turpis massa tincidunt dui. Dui ut
-            ornare lectus sit amet est.
+              {item.description}
           </Text>
         </View>
         <View style={{ marginBottom: SIZES.small }}>
           <View style={styles.location}>
             <View style={{ flexDirection: 'row' }}>
               <Ionicons name="location-outline" size={20} />
-              <Text> Jakarta </Text>
+              <Text> {item.product_location} </Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
               <MaterialCommunityIcons name="truck-delivery-outline" size={20} />

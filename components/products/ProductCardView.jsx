@@ -6,28 +6,29 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from "@expo/vector-icons"
 import { COLORS } from '../../constants';
 
-const ProductCardView = () => {
+const ProductCardView = ({item}) => {
   const navigation = useNavigation()
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("ProductDetails")}>
+    <TouchableOpacity onPress={() => navigation.navigate("ProductDetails", {item})}> 
+    {/*//! item diatas untuk mengirim kepada component productDetails  */}
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
             source={{
-              uri: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+              uri: item.imageUrl,
             }}
           />
         </View>
         <View style={styles.details}>
           <Text style={styles.title} numberOfLines={1}>
-            Sofa Ijo
+            {item.title}
           </Text>
           <Text style={styles.supplier} numberOfLines={1}>
-            Sofa ijo
+            {item.supplier}
           </Text>
           <Text style={styles.price} numberOfLines={1}>
-            Rp. 3.000.000
+            {item.price}
           </Text>
         </View>
         <TouchableOpacity style={styles.addBtn}>
