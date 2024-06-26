@@ -13,6 +13,7 @@ import styles from './search.style';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../constants';
 import axios from 'axios';
+import SearchTile from '../components/products/SearchTile';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -72,7 +73,8 @@ const Search = () => {
         <FlatList
           data={searchResult}
           keyExtractor={(item) => item._id}
-          renderItem={({ item }) => <Text>{item.title}</Text>}
+          renderItem={({ item }) => <SearchTile item={item}/>}
+          style={{ marginHorizontal: 12 }}
         />
       )}
     </SafeAreaView>
