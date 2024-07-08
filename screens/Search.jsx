@@ -16,6 +16,8 @@ import axios from 'axios';
 import SearchTile from '../components/products/SearchTile';
 
 const Search = () => {
+  
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const [searchInput, setSearchInput] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   // console.log(searchResult)
@@ -23,7 +25,7 @@ const Search = () => {
   async function handlePress() {
     try {
       const response = await axios.get(
-        `http://192.168.18.5:3000/api/products/search/${searchInput}`
+        `${apiUrl}api/products/search/${searchInput}`
       );
       setSearchResult(response.data);
     } catch (error) {

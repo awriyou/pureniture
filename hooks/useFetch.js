@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useFetch = () => {
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,7 +12,7 @@ const useFetch = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get('http://192.168.18.5:3000/api/products/');
+      const response = await axios.get(`${apiUrl}api/products/`);
     //   console.log(response)
       setData(response.data);
       setIsLoading(false);
