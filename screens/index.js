@@ -6,6 +6,7 @@ import ProductDetails from './ProductDetails';
 import NewRivals from './NewRivals';
 import Order from './Order';
 import Favorite from './Favorite';
+import SignUp from './SignUp';
 
 
-export {Home, Search, Profile, Cart, ProductDetails, NewRivals, Order, Favorite}
+export {Home, Search, Profile, Cart, ProductDetails, NewRivals, Order, Favorite, SignUp}

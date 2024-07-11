@@ -4,14 +4,27 @@ import { COLORS } from "../constants";
 
 const Button = ({onPress, title, isValid}) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={styles.btnWrapper(
-        isValid === false ? COLORS.gray : COLORS.primary
+    <View>
+      {isValid ? (
+        <TouchableOpacity
+          onPress={onPress}
+          style={styles.btnWrapper(
+            isValid === false ? COLORS.gray : COLORS.primary
+          )}
+        >
+          <Text style={styles.btnText}>{title}</Text>
+        </TouchableOpacity>
+      ) : (
+        <View
+          onPress={onPress}
+          style={styles.btnWrapper(
+            isValid === false ? COLORS.gray : COLORS.primary
+          )}
+        >
+          <Text style={styles.btnText}>{title}</Text>
+        </View>
       )}
-    >
-      <Text style={styles.btnText}>{title}</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

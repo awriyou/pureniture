@@ -39,12 +39,17 @@ const styles = StyleSheet.create({
   iconStyle: {
     marginRight: 10,
   },
-  errorMessage:{
+  errorMessage: {
     color: COLORS.red,
     fontFamily: 'regular',
     fontSize: SIZES.xSmall,
     marginTop: 5,
-    marginLeft: 5
+    marginLeft: 5,
+  },
+  registration:{
+    marginTop: 20,
+    textAlign: 'center',
+    
   },
 });
 

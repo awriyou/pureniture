@@ -1,11 +1,20 @@
-import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './loginpage.style';
 import { BackBtn, Button } from '../components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../constants';
 
 const validationSchema = Yup.object({
@@ -18,12 +27,23 @@ const validationSchema = Yup.object({
 });
 
 const LoginPage = ({ navigation }) => {
-
   const [loader, setLoader] = useState(false);
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(true);
-  
 
+  function inValidForm() {
+    Alert.alert('Invalid Form', 'Please Provide all required fields', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+      },
+      {
+        text: 'Clear',
+        onPress: () => {},
+      },
+      // { defaultIndex: 1 },
+    ]);
+  }
   return (
     <ScrollView>
       <SafeAreaView style={{ marginHorizontal: 20 }}>
@@ -73,7 +93,7 @@ const LoginPage = ({ navigation }) => {
                       }}
                       value={values.email}
                       onChangeText={handleChange('email')}
-                      autoCapitalize='none'
+                      autoCapitalize="none"
                       autoCorrect={false}
                       style={{ flex: 1 }}
                     />
@@ -96,7 +116,7 @@ const LoginPage = ({ navigation }) => {
                       style={styles.iconStyle}
                     />
                     <TextInput
-                    secureTextEntry={obsecureText}
+                      secureTextEntry={obsecureText}
                       placeholder="Password"
                       onFocus={() => {
                         setFieldTouched('password');
@@ -106,19 +126,31 @@ const LoginPage = ({ navigation }) => {
                       }}
                       value={values.password}
                       onChangeText={handleChange('password')}
-                      autoCapitalize='none'
+                      autoCapitalize="none"
                       autoCorrect={false}
                       style={{ flex: 1 }}
                     />
-                    <TouchableOpacity onPress={() => {setObsecureText(!obsecureText)}}>
-                      <MaterialCommunityIcons name={obsecureText ? "eye-outline" : "eye-off-outline"} size={20}/>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setObsecureText(!obsecureText);
+                      }}
+                    >
+                      <MaterialCommunityIcons
+                        name={obsecureText ? 'eye-outline' : 'eye-off-outline'}
+                        size={20}
+                      />
                     </TouchableOpacity>
                   </View>
                   {touched.password && errors.password && (
                     <Text style={styles.errorMessage}>{errors.password}</Text>
                   )}
                 </View>
-                <Button onPress={isValid ? handleSubmit : () => {}} title={'L O G I N'} isValid={isValid}/>
+                <Button
+                  onPress={isValid ? handleSubmit : inValidForm}
+                  title={'L O G I N'}
+                  isValid={isValid}
+                />
+                <Text style={styles.registration} onPress={() => {navigation.navigate('Signup')}}> Register </Text>
               </View>
             )}
           </Formik>
