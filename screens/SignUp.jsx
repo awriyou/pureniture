@@ -14,21 +14,22 @@ import styles from './signup.style';
 import { BackBtn, Button } from '../components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../constants';
 
 const validationSchema = Yup.object({
   password: Yup.string()
     .min(8, 'Password must be 8 at least characters')
     .required('Your password'),
+  username: Yup.string().min(3, 'Provide valid username').required('Required'),
   email: Yup.string()
     .email('Provide valid email address')
     .required('Your email address'),
+  location: Yup.string().min(3, 'Provide valid location').required('Required'),
 });
 
 const SignUp = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
-  const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(true);
 
   function inValidForm() {
@@ -55,7 +56,12 @@ const SignUp = ({ navigation }) => {
           />
           <Text style={styles.title}>Unlimited Luxurious Furniture</Text>
           <Formik
-            initialValues={{ email: '', password: '' }}
+            initialValues={{
+              email: '',
+              password: '',
+              location: '',
+              username: '',
+            }}
             validationSchema={validationSchema}
             onSubmit={(values) => console.log(values)}
           >
@@ -70,6 +76,38 @@ const SignUp = ({ navigation }) => {
               setFieldTouched,
             }) => (
               <View>
+                <View style={styles.wrapperForm}>
+                  <Text style={styles.label}>Username</Text>
+                  <View
+                    style={styles.inputWrapper(
+                      touched.email ? COLORS.secondary : COLORS.offwhite
+                    )}
+                  >
+                    <MaterialCommunityIcons
+                      name="face-man-profile"
+                      size={20}
+                      color={COLORS.gray}
+                      style={styles.iconStyle}
+                    />
+                    <TextInput
+                      placeholder="Enter username"
+                      onFocus={() => {
+                        setFieldTouched('username');
+                      }}
+                      onBlur={() => {
+                        setFieldTouched('username', '');
+                      }}
+                      value={values.username}
+                      onChangeText={handleChange('username')}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      style={{ flex: 1 }}
+                    />
+                  </View>
+                  {touched.username && errors.username && (
+                    <Text style={styles.errorMessage}>{errors.username}</Text>
+                  )}
+                </View>
                 <View style={styles.wrapperForm}>
                   <Text style={styles.label}>Email</Text>
                   <View
@@ -100,6 +138,38 @@ const SignUp = ({ navigation }) => {
                   </View>
                   {touched.email && errors.email && (
                     <Text style={styles.errorMessage}>{errors.email}</Text>
+                  )}
+                </View>
+                <View style={styles.wrapperForm}>
+                  <Text style={styles.label}>Location</Text>
+                  <View
+                    style={styles.inputWrapper(
+                      touched.location ? COLORS.secondary : COLORS.offwhite
+                    )}
+                  >
+                    <Ionicons
+                      name="location-outline"
+                      size={20}
+                      color={COLORS.gray}
+                      style={styles.iconStyle}
+                    />
+                    <TextInput
+                      placeholder="Enter location"
+                      onFocus={() => {
+                        setFieldTouched('location');
+                      }}
+                      onBlur={() => {
+                        setFieldTouched('location', '');
+                      }}
+                      value={values.location}
+                      onChangeText={handleChange('location')}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      style={{ flex: 1 }}
+                    />
+                  </View>
+                  {touched.location && errors.location && (
+                    <Text style={styles.errorMessage}>{errors.location}</Text>
                   )}
                 </View>
                 <View style={styles.wrapperForm}>
@@ -147,17 +217,9 @@ const SignUp = ({ navigation }) => {
                 </View>
                 <Button
                   onPress={isValid ? handleSubmit : inValidForm}
-                  title={'L O G I N'}
+                  title={'S I G N  U P'}
                   isValid={isValid}
                 />
-                <Text
-                  style={styles.registration}
-                  onPress={() => {
-                    navigation.navigate('Signup');
-                  }}
-                >
-                  Register
-                </Text>
               </View>
             )}
           </Formik>
