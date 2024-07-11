@@ -2,9 +2,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { COLORS } from "../constants";
 
-const Button = ({onPress, title}) => {
+const Button = ({onPress, title, isValid}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.btnWrapper}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.btnWrapper(
+        isValid === false ? COLORS.gray : COLORS.primary
+      )}
+    >
       <Text style={styles.btnText}>{title}</Text>
     </TouchableOpacity>
   );
@@ -18,13 +23,13 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 18,
   },
-  btnWrapper:{
+  btnWrapper: (backgroundColor) => ({
     height: 50,
     width: '100%',
-    backgroundColor: COLORS.primary,
+    backgroundColor: backgroundColor,
     marginVertical: 20,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 12,
-  },
+  }),
 });
